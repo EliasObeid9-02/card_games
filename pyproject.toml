@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "card-games"
+version = "0.1.0"
+description = "Django web application to play card games online."
+authors = ["Elias Obeid <elias.obeid9.02@gmail.com>"]
+license = "LICENSE"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "4.0"
+python-dotenv = "^1.0.0"
+dj-database-url = "^2.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
