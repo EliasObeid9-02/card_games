@@ -20,7 +20,10 @@ dotenv.load_dotenv(os.path.join(BASE_DIR / ".evar", ".env"))
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split()
+ALLOWED_HOSTS = [
+    ".vercel.app",
+    "127.0.0.1",
+]
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_URL = "static/"
