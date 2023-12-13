@@ -16,7 +16,7 @@ import os, dj_database_url, dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv.load_dotenv(os.path.join(BASE_DIR / ".evar", ".env"))
+dotenv.load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
@@ -75,7 +75,18 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config()}
+DATABASES = {
+    "prod": dj_database_url.config(),
+    "dev": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("DEV_DB_NAME"),
+        "USER": os.environ.get("DEV_DB_USER"),
+        "PASSWORD": os.environ.get("DEV_DB_PASS"),
+        "HOST": os.environ.get("DEV_DB_HOST"),
+        "PORT": os.environ.get("DEV_DB_PORT"),
+    },
+}
+DATABASES["default"] = DATABASES["dev" if DEBUG else "prod"]
 
 
 # Password validation
